@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ✨</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: white;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Stars */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  opacity: 0.7;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from {opacity: 0.2;}
+  to {opacity: 1;}
+}
+
+.container {
+  margin-top: 80px;
+}
+
+/* Title */
+h1 {
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.sub {
+  color: #94a3b8;
+  margin-bottom: 30px;
+}
+
+/* Gift */
+.gift {
+  font-size: 90px;
+  cursor: pointer;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from {transform: scale(1);}
+  to {transform: scale(1.1);}
+}
+
+/* Card */
+.card {
+  display: none;
+  background: #f5e6d3;
+  color: #333;
+  width: 320px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(40px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Something for you…</h1>
+  <p class="sub">Tap the gift ✨</p>
+
+  <div class="gift" onclick="openGift()">🎁</div>
+
+  <div class="card" id="card">
+    <p><strong>To: Maria</strong></p>
+
+    <p id="text"></p>
+
+    <p><i>— Saif Ul Haq</i></p>
+  </div>
+</div>
+
+<audio id="music" loop>
+  <source src="https://www2.cs.uic.edu/~i101/SoundFiles/StarWars60.wav" type="audio/mpeg">
+</audio>
+
+<script>
+// Stars
+for (let i = 0; i < 60; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.top = Math.random() * 100 + "vh";
+  document.body.appendChild(star);
+}
+
+// Typing text
+let message = `Some people pass by...
+you stayed, without even trying.
+
+And somewhere between moments,
+you became something
+I wouldn't want to lose.`;
+
+let i = 0;
+function typeText() {
+  if (i < message.length) {
+    document.getElementById("text").innerHTML += message.charAt(i);
+    i++;
+    setTimeout(typeText, 40);
+  }
+}
+
+// Open gift
+function openGift() {
+  document.getElementById("card").style.display = "block";
+  document.getElementById("music").play();
+  typeText();
+}
+</script>
+
+</body>
+</html>
